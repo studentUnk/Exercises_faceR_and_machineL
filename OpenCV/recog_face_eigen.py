@@ -11,7 +11,7 @@ RESIZE_FACTOR = 4
 
 class RecogEigenFaces:
 
- def __init__(self):
+ def __init__(self): # First function to be executed when the variable is created
   cascPath = "haarcascadeData/haarcascade_frontalface_default.xml"
   self.face_cascade = cv2.CascadeClassifier(cascPath) # set haarcascade
   if len(sys.argv) < 4:
@@ -21,7 +21,7 @@ class RecogEigenFaces:
   self.model = cv2.face.EigenFaceRecognizer_create() # create eigen face recognizer
   self.face_names = []
   
- def load_trained_data(self):
+ def load_trained_data(self): # Load the csv of a trained dataset
   names = {}
   key = 0
   for (subdirs, dirs, files) in os.walk(self.face_dir):
@@ -31,7 +31,7 @@ class RecogEigenFaces:
    self.names = names
    self.model.read(sys.argv[2]) # load model
  
- def show_image(self):
+ def show_image(self): # show image and the name if it is recognized
   img = cv2.imread(sys.argv[3]) # load face ro recognize
   #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
   while True:
@@ -47,7 +47,7 @@ class RecogEigenFaces:
    if cv2.waitKey(1) & 0xFF == ord('q'):
     cv2.destroyAllWindows()
   
- def show_video(self):
+ def show_video(self): # gets the path of the camera and shows a video to recognize face
   video_capture = cv2.VideoCapture(0) # set path of the video
   while True:
    ret, frame = video_capture.read() # read video
@@ -61,7 +61,7 @@ class RecogEigenFaces:
     cv2.destroyAllWindows()
     return
  
- def process_image_2(self, inImg):
+ def process_image_2(self, inImg): # Process the image to find a face
   #frame = cv2.flip(inImg,1)
   frame = inImg
   #resized_width, resized_height = (112,92)
@@ -107,7 +107,7 @@ class RecogEigenFaces:
    persons.append(person)
   return (frame, persons)
  
- def process_image(self, inImg):
+ def process_image(self, inImg): # Process the image to find a face
   frame = cv2.flip(inImg,1)
   resized_width, resized_height = (112,92)
   gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

@@ -8,14 +8,14 @@ import os
 import matplotlib.pyplot as plt
 from PIL import Image
 
-RESIZE_FACTOR = 4
+RESIZE_FACTOR = 4 # not used in the moment
 
-class RecogEigenFaces:
+class RecogFaces:
 
- def __init__(self):
+ def __init__(self): # first function to be executed
   cascPath = "haarcascadeData/haarcascade_frontalface_default.xml"
   self.face_cascade = cv2.CascadeClassifier(cascPath) # set haarcascade
-  if len(sys.argv) < 5:
+  if len(sys.argv) < 5: # check that all the values have been set
    print "usage: set face-directory <base_path> eigen-face-model <model_path> image-video <source_path> type-of-algorithm 1=Eigen 2=Fisher 3=LBPH"
    sys.exit(1)
   self.face_dir = sys.argv[1] # set directory with the faces
@@ -34,7 +34,7 @@ class RecogEigenFaces:
   
   self.count_faces = 0
   
- def load_trained_data(self):
+ def load_trained_data(self): # load the dataset of the trained data (csv)
   names = {}
   key = 0
   for (subdirs, dirs, files) in os.walk(self.face_dir):
@@ -44,7 +44,7 @@ class RecogEigenFaces:
    self.names = names
    self.model.read(sys.argv[2]) # load model
  
- def show_image(self):
+ def show_image(self): # recognize in image
   img = cv2.imread(sys.argv[3]) # load face ro recognize
   #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
   while True:
@@ -65,8 +65,8 @@ class RecogEigenFaces:
    if cv2.waitKey(1) & 0xFF == ord('q'):
     cv2.destroyAllWindows()
   
- def show_video(self):
-  #video_capture = cv2.VideoCapture(0) # set path of the video if cam
+ def show_video(self): # recognize in video
+  #video_capture = cv2.VideoCapture(0) # set path of the video if it is a cam
   video_capture = cv2.VideoCapture(sys.argv[3])
   print sys.argv[3]
   while True:
@@ -85,7 +85,7 @@ class RecogEigenFaces:
     cv2.destroyAllWindows()
     return
  
- def process_image_2(self, inImg):
+ def process_image_2(self, inImg): # process the image and find coincidence
   #frame = cv2.flip(inImg,1)
   frame = inImg
   #print frame
@@ -144,7 +144,7 @@ class RecogEigenFaces:
    persons.append(person)
   return (frame, persons)
  
- def process_image(self, inImg):
+ def process_image(self, inImg): # process the image
   frame = cv2.flip(inImg,1)
   resized_width, resized_height = (112,92)
   gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -180,7 +180,7 @@ class RecogEigenFaces:
   return (frame, persons)
  
 if __name__ == '__main__':
- recognizer = RecogEigenFaces()
+ recognizer = RecogFaces()
  recognizer.load_trained_data()
  print "The data has been load"
  print "Press 'q' to quit"

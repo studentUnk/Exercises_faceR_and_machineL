@@ -42,6 +42,7 @@ import numpy as np
 import cv2
 import os.path
 
+'''
 def Distance(p1,p2):
   dx = p2[0] - p1[0]
   dy = p2[1] - p1[1]
@@ -89,32 +90,33 @@ def CropFace(image, eye_left=(0,0), eye_right=(0,0), offset_pct=(0.2,0.2), dest_
   # resize it
   image = image.resize(dest_sz, Image.ANTIALIAS)
   return image
+'''
 
 if __name__ == "__main__":
   if len(sys.argv) != 2:
         print "usage: align_face_image.py <folder_path>"
         print "Please select a folder"
         sys.exit(1)
-  # Detect the face
+  # Detect the face with algorithm haarcascade
   face_cascade = cv2.CascadeClassifier('haarcascadeData/haarcascade_frontalface_default.xml')
 
-  BASE_PATH = sys.argv[1]
+  BASE_PATH = sys.argv[1] # Path of the folder to align the faces
   for (dirpath, dirnames, filenames) in os.walk(BASE_PATH):
    for subdirname in dirnames:
-    subject_path = os.path.join(dirpath, subdirname)
+    subject_path = os.path.join(dirpath, subdirname) # load folders in the folder
     for filename in os.listdir(subject_path):
-     abs_path = "%s/%s" % (subject_path, filename)
-     print abs_path
-     img = cv2.imread(abs_path) #load image
-     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-     faceW, faceH = 200, 200
-     dimR = (faceW, faceH)
-     face = face_cascade.detectMultiScale(gray, 1.3, 5)
-     for (x,y,w,h) in face:
-      print "face found and overwrited"
-      imgCrop = img[y:y+h, x:x+w]
-      imgResized = cv2.resize(imgCrop, dimR)
-      cv2.imwrite(abs_path, imgResized)
+     abs_path = "%s/%s" % (subject_path, filename) # set path of the image
+     print abs_path # check that the path is right
+     img = cv2.imread(abs_path) # load image
+     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # gray scale of the image
+     faceW, faceH = 200, 200 # dimension to crop the image
+     dimR = (faceW, faceH) # set values in a variable
+     face = face_cascade.detectMultiScale(gray, 1.3, 5) # look for a face in the image
+     for (x,y,w,h) in face: # if there is a face face != 0
+      print "face found and overwrited" 
+      imgCrop = img[y:y+h, x:x+w] # Crop the face in the image
+      imgResized = cv2.resize(imgCrop, dimR) # Resize with the dimension
+      cv2.imwrite(abs_path, imgResized) # Save new image
      
   '''   
   # ---------------------------------- FIX   

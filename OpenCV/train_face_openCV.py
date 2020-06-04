@@ -12,8 +12,8 @@ FREQ_DIV = 5
 RESIZE_FACTOR = 4
 NUM_TRAINING = 100 # maximum amount of images
 
-class TrainEigenFaces:
- def __init__(self):
+class TrainFaces:
+ def __init__(self): # first function to be executed
   # path of the file to recognize faces
   cascPath = "haarcascadeData/haarcascade_frontalface_default.xml"
   # load file 
@@ -39,7 +39,7 @@ class TrainEigenFaces:
   self.count_captures = 0 # data for the capture video
   self.count_timer = 0 # data for the capture video
 
- def eigen_train_data(self):
+ def train_data(self):
   imgs = []
   tags = []
   index = 0
@@ -71,6 +71,6 @@ class TrainEigenFaces:
   return 
  
 if __name__ == '__main__':
- trainer = TrainEigenFaces()
- trainer.eigen_train_data()
- print "Training face eigenfaces has finished"
+ trainer = TrainFaces()
+ trainer.train_data()
+ print "Training faces has finished"

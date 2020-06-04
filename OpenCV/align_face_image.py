@@ -41,6 +41,7 @@ from PIL import Image
 import numpy as np
 import cv2
 
+'''
 def Distance(p1,p2):
   dx = p2[0] - p1[0]
   dy = p2[1] - p1[1]
@@ -88,6 +89,7 @@ def CropFace(image, eye_left=(0,0), eye_right=(0,0), offset_pct=(0.2,0.2), dest_
   # resize it
   image = image.resize(dest_sz, Image.ANTIALIAS)
   return image
+'''
 
 if __name__ == "__main__":
   if len(sys.argv) != 2:
@@ -97,13 +99,13 @@ if __name__ == "__main__":
   # Detect the face
   face_cascade = cv2.CascadeClassifier('haarcascadeData/haarcascade_frontalface_default.xml')
   # load image
-  img = cv2.imread(sys.argv[1])
-  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  img = cv2.imread(sys.argv[1]) # load image
+  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # set gray scale
 
-  face = face_cascade.detectMultiScale(gray, 1.3, 5)
-  for (x,y,w,h) in face:
-    imgCrop = img[y:y+h, x:x+w]
-    cv2.imwrite("crop_"+sys.argv[1], imgCrop)
+  face = face_cascade.detectMultiScale(gray, 1.3, 5) # find face
+  for (x,y,w,h) in face: # load the faces
+    imgCrop = img[y:y+h, x:x+w] # Crop face
+    cv2.imwrite("crop_"+sys.argv[1], imgCrop) # Save face
     
   '''
   image =  Image.open("arnie.jpg")

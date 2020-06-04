@@ -13,7 +13,7 @@ RESIZE_FACTOR = 4
 NUM_TRAINING = 100 # maximum amount of images
 
 class TrainEigenFaces:
- def __init__(self):
+ def __init__(self): # first function to be executed
   # path of the file to recognize faces
   cascPath = "haarcascadeData/haarcascade_frontalface_default.xml"
   # load file 
@@ -37,7 +37,7 @@ class TrainEigenFaces:
   self.count_captures = 0 # data for the capture video
   self.count_timer = 0 # data for the capture video
 
- def capture_training_images(self):
+ def capture_training_images(self): # train dataset with faces got through the camera
   video_capture = cv2.VideoCapture(0) # set camera
   while True:
    self.count_timer += 1
@@ -52,7 +52,7 @@ class TrainEigenFaces:
     cv2.destroyAllWindows() # delete memory and frames
     return
    
- def process_image(self, inImg):
+ def process_image(self, inImg): # process the image
   frame = cv2.flip(inImg, 1) # flip (turn) image over y-axis
   rezised_width, resized_height = (112,92) # parameters to rezise image
   if self.count_captures < NUM_TRAINING:
@@ -96,7 +96,7 @@ class TrainEigenFaces:
    
    return frame
 
- def eigen_train_data(self):
+ def eigen_train_data(self): # train the model with the data
   imgs = []
   tags = []
   index = 0
