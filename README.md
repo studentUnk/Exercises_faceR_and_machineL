@@ -9,7 +9,8 @@ I am not the owner of most of the code that is written here, so, below there are
 
 **Database's faces:**
 - [Yale Face Database](http://vision.ucsd.edu/content/yale-face-database): *Test recognition with open faces*
-**Handle the images**
-- [OpenCV](https://docs.opencv.org/3.4/): *It does all the work of find a face, train with a dataset and recognizing (eigenface, fisherface, LBPH) *
+
+**Handle the images:**
+- [OpenCV](https://docs.opencv.org/3.4/): *It does all the work of find a face, train with a dataset and recognizing (eigenface, fisherface, LBPH)*
 - [cvlib](https://github.com/tanay-bits/cvlib/tree/master/Face%20Recognition): *Repository with an stable (but old) implementation of face recognition using opencv*
 - [face_recognition](https://github.com/ageitgey/face_recognition): *Train and recognize faces of adults*
